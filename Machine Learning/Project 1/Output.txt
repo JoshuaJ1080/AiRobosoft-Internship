@@ -1,0 +1,243 @@
+Python 3.9.13 (main, Aug 25 2022, 23:51:50) [MSC v.1916 64 bit (AMD64)]
+Type "copyright", "credits" or "license" for more information.
+
+IPython 7.31.1 -- An enhanced Interactive Python.
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv("advertising.csv")
+
+data.head()
+Out[3]: 
+      TV  Radio  Newspaper  Sales
+0  230.1   37.8       69.2   22.1
+1   44.5   39.3       45.1   10.4
+2   17.2   45.9       69.3   12.0
+3  151.5   41.3       58.5   16.5
+4  180.8   10.8       58.4   17.9
+
+%matplotlib inline
+
+fig, axs = plt.subplots(1,3,sharey = True)
+data.plot(kind='scatter',x='TV',y='Sales',ax=axs[0],figsize(14,7))
+data.plot(kind='scatter',x='Radio',y='Sales',ax=axs[1],)
+data.plot(kind='scatter',x='Newspaper',y='Sales',ax=axs[2])
+  File "C:\Users\Joshua\AppData\Local\Temp\ipykernel_5028\189268909.py", line 2
+    data.plot(kind='scatter',x='TV',y='Sales',ax=axs[0],figsize(14,7))
+                                                                     ^
+SyntaxError: positional argument follows keyword argument
+
+
+fig, axs = plt.subplots(1,3,sharey = True)
+data.plot(kind='scatter',x='TV',y='Sales',ax=axs[0],figsize(14,7))
+data.plot(kind='scatter',x='Radio',y='Sales',ax=axs[1])
+data.plot(kind='scatter',x='Newspaper',y='Sales',ax=axs[2])
+  File "C:\Users\Joshua\AppData\Local\Temp\ipykernel_5028\35837993.py", line 2
+    data.plot(kind='scatter',x='TV',y='Sales',ax=axs[0],figsize(14,7))
+                                                                     ^
+SyntaxError: positional argument follows keyword argument
+
+
+fig, axs = plt.subplots(1,3,sharey = True)
+data.plot(kind='scatter',x='TV',y='Sales',ax=axs[0],figsize=
+          (16,8))
+data.plot(kind='scatter',x='Radio',y='Sales',ax=axs[1])
+data.plot(kind='scatter',x='Newspaper',y='Sales',ax=axs[2])
+Out[7]: <AxesSubplot:xlabel='Newspaper', ylabel='Sales'>
+ 
+Warning
+Figures now render in the Plots pane by default. To make them also appear inline in the Console, uncheck "Mute Inline Plotting" under the Plots pane options menu.
+ 
+
+runcell(0, 'C:/Users/Joshua/Desktop/CODE FILES/Machine Learning/Project 1/Coding_Project_1.py')
+
+WARNING: This is not valid Python code. If you want to use IPython magics, flexible indentation, and prompt removal, we recommend that you save this file with the .ipy extension.
+
+Traceback (most recent call last):
+
+  File "C:\Users\Joshua\Desktop\CODE FILES\Machine Learning\Project 1\Coding_Project_1.py", line 39, in <module>
+    lr
+
+NameError: name 'lr' is not defined
+
+
+feature_cols =['TV']
+X = data[feature_cols]
+y = data.Sales
+
+from sklearn.linear_model import LinearRegression
+lr = LinearRegression()
+lr.fit(X,y)
+Out[10]: LinearRegression()
+
+print(lr.intercept_)
+6.9748214882298925
+
+print(lr.coef_)
+[0.05546477]
+
+result = 6.97+0.0554*50
+print(result)
+9.74
+
+X_new.head()
+Traceback (most recent call last):
+
+  File "C:\Users\Joshua\AppData\Local\Temp\ipykernel_5028\1564041313.py", line 1, in <module>
+    X_new.head()
+
+NameError: name 'X_new' is not defined
+
+
+runcell(0, 'C:/Users/Joshua/Desktop/CODE FILES/Machine Learning/Project 1/Coding_Project_1.py')
+6.9748214882298925
+[0.05546477]
+9.74
+
+X_new = pd.DataFrame({'TV':[data.TV.min(),data.TV.max()]})
+
+X_new.head()
+Out[17]: 
+      TV
+0    0.7
+1  296.4
+
+preds = lr.predict(X_new)
+
+runcell(0, 'C:/Users/Joshua/Desktop/CODE FILES/Machine Learning/Project 1/Coding_Project_1.py')
+6.9748214882298925
+[0.05546477]
+9.74
+
+preds
+Out[20]: array([ 7.01364683, 23.41457946])
+
+data.plot(kind ='scatter'x='TV',y='Sales')
+  File "C:\Users\Joshua\AppData\Local\Temp\ipykernel_5028\963313013.py", line 1
+    data.plot(kind ='scatter'x='TV',y='Sales')
+                             ^
+SyntaxError: invalid syntax
+
+
+data.plot(kind ='scatter',x='TV',y='Sales')
+Out[22]: <AxesSubplot:xlabel='TV', ylabel='Sales'>
+
+plt.plot(X_new,preds,c='red',linewidth = 3)
+Out[23]: [<matplotlib.lines.Line2D at 0x18939e6bbb0>]
+
+data.plot(kind ='scatter',x='TV',y='Sales')
+
+plt.plot(X_new,preds,c='red',linewidth = 3)
+Out[24]: [<matplotlib.lines.Line2D at 0x18939e33b50>]
+
+import statsmodels.formula.api as smf
+lm = smf.ols(formula='Sales ~ TV', data=data).fit()
+lm.conf_int()
+Out[25]: 
+                  0         1
+Intercept  6.338740  7.610903
+TV         0.051727  0.059203
+
+lm.pvalues
+Out[26]: 
+Intercept    5.027719e-54
+TV           7.927912e-74
+dtype: float64
+
+lm.rsquared
+Out[27]: 0.8121757029987414
+
+feature_cols = ['TV','Radio','Newspaper']
+X = data[feature_cols]
+y = data.Sales
+
+
+lr = LinearRegression()
+lr.fit(X,y)
+Out[28]: LinearRegression()
+
+print(lt.intercept_)
+Traceback (most recent call last):
+
+  File "C:\Users\Joshua\AppData\Local\Temp\ipykernel_5028\2639701851.py", line 1, in <module>
+    print(lt.intercept_)
+
+NameError: name 'lt' is not defined
+
+
+print(lr.intercept_)
+4.625124078808655
+
+print(lr.coef_)
+[0.05444578 0.10700123 0.00033566]
+
+lm = smf.ols(formula='Sales ~ TV+Radio+Newspaper', data=data).fit()
+lm.conf_int()
+lm.summary()
+Out[32]: 
+<class 'statsmodels.iolib.summary.Summary'>
+"""
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Sales   R-squared:                       0.903
+Model:                            OLS   Adj. R-squared:                  0.901
+Method:                 Least Squares   F-statistic:                     605.4
+Date:                Mon, 13 Mar 2023   Prob (F-statistic):           8.13e-99
+Time:                        19:29:09   Log-Likelihood:                -383.34
+No. Observations:                 200   AIC:                             774.7
+Df Residuals:                     196   BIC:                             787.9
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      4.6251      0.308     15.041      0.000       4.019       5.232
+TV             0.0544      0.001     39.592      0.000       0.052       0.057
+Radio          0.1070      0.008     12.604      0.000       0.090       0.124
+Newspaper      0.0003      0.006      0.058      0.954      -0.011       0.012
+==============================================================================
+Omnibus:                       16.081   Durbin-Watson:                   2.251
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               27.655
+Skew:                          -0.431   Prob(JB):                     9.88e-07
+Kurtosis:                       4.605   Cond. No.                         454.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+"""
+
+lm = smf.ols(formula='Sales ~ TV+Radio', data=data).fit()
+lm.conf_int()
+lm.summary()
+Out[33]: 
+<class 'statsmodels.iolib.summary.Summary'>
+"""
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Sales   R-squared:                       0.903
+Model:                            OLS   Adj. R-squared:                  0.902
+Method:                 Least Squares   F-statistic:                     912.7
+Date:                Mon, 13 Mar 2023   Prob (F-statistic):          2.39e-100
+Time:                        19:30:31   Log-Likelihood:                -383.34
+No. Observations:                 200   AIC:                             772.7
+Df Residuals:                     197   BIC:                             782.6
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      4.6309      0.290     15.952      0.000       4.058       5.203
+TV             0.0544      0.001     39.726      0.000       0.052       0.057
+Radio          0.1072      0.008     13.522      0.000       0.092       0.123
+==============================================================================
+Omnibus:                       16.227   Durbin-Watson:                   2.252
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               27.973
+Skew:                          -0.434   Prob(JB):                     8.43e-07
+Kurtosis:                       4.613   Cond. No.                         425.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+"""
